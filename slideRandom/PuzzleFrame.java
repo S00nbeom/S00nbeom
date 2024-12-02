@@ -80,6 +80,7 @@ public class PuzzleFrame extends JFrame {
     public void started() {
         started = true;
         cnt = 0;
+        button_board[size-1][size-1].setForeground(Color.BLACK);
     }
     public void time(){
         while(true){
