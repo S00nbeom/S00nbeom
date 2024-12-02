@@ -12,7 +12,8 @@ public class PuzzleFrame extends JFrame {
     private boolean started = false;
     private boolean finished = false;
     private float dt = 10000000;
-    private JLabel label = new JLabel("time: 0s");
+    private int cnt = 0;
+    private JLabel label = new JLabel("time: 0s, move: 0");
 
     public PuzzleFrame(SlidePuzzleBoard b) {
         board = b;
@@ -53,7 +54,6 @@ public class PuzzleFrame extends JFrame {
             if (board.gameOver())
                 finish();
         }
-        repaint();
     }
     public void finish(){
         button_board[size-1][size-1].setText("Done");
@@ -62,6 +62,7 @@ public class PuzzleFrame extends JFrame {
     }
     public void started() {
         started = true;
+        cnt = 0;
     }
     public void time(){
         while(true){
@@ -71,11 +72,15 @@ public class PuzzleFrame extends JFrame {
     public void ut(LocalTime t) {
         int nowTime = t.getHour()*3600+t.getMinute() * 60 + t.getSecond();
         if(started && !finished)
-            label.setText("time: "+(nowTime - sb.getT() + "s"));
+            label.setText("time: "+(nowTime - sb.getT()) + "s, move: " + cnt);
         else if (finished){
             dt = (nowTime - sb.getT());
-            System.out.println("Clear time : " + (dt * 0.5 + 10 * 0.7) );
+            System.out.println("Clear time : " + (dt * 0.7 + cnt * 0.3) );
             finished = false;
         }
+    }
+
+    public void pMove(){
+        cnt++;
     }
 }
