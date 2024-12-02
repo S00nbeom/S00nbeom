@@ -24,7 +24,7 @@ public class PuzzleButton extends JButton implements ActionListener {
             index = Integer.parseInt(getText());
             if (board.move(index)) {
                 frame.update();
-                frame.pMove();
+                frame.updateCnt();
             }
         }
     }
