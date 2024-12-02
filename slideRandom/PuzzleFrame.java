@@ -94,7 +94,7 @@ public class PuzzleFrame extends JFrame {
             label.setText("time: "+(nowTime - sb.getT()) + "s, move: " + cnt);
         else if (finished){
             dt = (nowTime - sb.getT());
-            System.out.println("Clear time : " + (dt * 0.7 + cnt * 0.3) );
+            System.out.println("score: " + (dt * 0.7 + cnt * 0.3) );
             finished = false;
         }
     }
