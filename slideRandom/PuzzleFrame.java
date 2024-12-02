@@ -47,8 +47,16 @@ public class PuzzleFrame extends JFrame {
             for (int r = 0; r <size; r++) {
                 for (int c = 0; c<size; c++) {
                     int piece = board.getPuzzlePiece(r,c).faceValue();
-                    if (piece != size*size) button_board[r][c].setText(""+piece);
-                    else button_board[r][c].setText("");
+                    if (piece != size*size) {
+                        button_board[r][c].setText(""+piece);
+                        if (board.foundBlank(piece))
+                            button_board[r][c].setBackground(Color.yellow);
+                        else button_board[r][c].setBackground(Color.white);
+                    }
+                    else {
+                        button_board[r][c].setText("");
+                        button_board[r][c].setBackground(Color.black);
+                    }
                 }
             }
             if (board.gameOver())

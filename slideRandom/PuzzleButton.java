@@ -12,6 +12,7 @@ public class PuzzleButton extends JButton implements ActionListener {
     public PuzzleButton(SlidePuzzleBoard b, PuzzleFrame f) {
         board = b;
         frame = f;
+        setBackground(Color.white);
         setPreferredSize(new Dimension(80,80));
         addActionListener(this);
     }
