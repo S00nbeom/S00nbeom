@@ -21,7 +21,7 @@ public class StartButton extends JButton implements ActionListener {
         frame.started();
         board.createPuzzleBoard();
         frame.update();
-        t = LocalTime.now().getMinute()*60 + LocalTime.now().getSecond();
+        t = LocalTime.now().getHour()*3600+LocalTime.now().getMinute()*60 + LocalTime.now().getSecond();
     }
 
     public int getT() {

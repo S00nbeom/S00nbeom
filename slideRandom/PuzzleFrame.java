@@ -69,7 +69,7 @@ public class PuzzleFrame extends JFrame {
         }
     }
     public void ut(LocalTime t) {
-        int nowTime = t.getMinute() * 60 + t.getSecond();
+        int nowTime = t.getHour()*3600+t.getMinute() * 60 + t.getSecond();
         if(started && !finished)
             label.setText("time: "+(nowTime - sb.getT() + "s"));
         else if (finished){
