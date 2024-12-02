@@ -14,6 +14,7 @@ public class PuzzleFrame extends JFrame {
     private float dt = 10000000;
     private int cnt = 0;
     private JLabel label = new JLabel("time: 0s, move: 0");
+    private int nowTime = 0;
 
     public PuzzleFrame(SlidePuzzleBoard b) {
         board = b;
@@ -83,11 +84,11 @@ public class PuzzleFrame extends JFrame {
     }
     public void time(){
         while(true){
-            ut(LocalTime.now());
+            updateTime(LocalTime.now());
         }
     }
-    public void ut(LocalTime t) {
-        int nowTime = t.getHour()*3600+t.getMinute() * 60 + t.getSecond();
+    public void updateTime(LocalTime t) {
+        nowTime = t.getHour()*3600+t.getMinute() * 60 + t.getSecond();
         if(started && !finished)
             label.setText("time: "+(nowTime - sb.getT()) + "s, move: " + cnt);
         else if (finished){
@@ -97,7 +98,13 @@ public class PuzzleFrame extends JFrame {
         }
     }
 
-    public void pMove(){
+    public void updateCnt(){
         cnt++;
+        if(started && !finished)
+            label.setText("time: "+(nowTime - sb.getT()) + "s, move: " + cnt);
+    }
+
+    public float getDt(){
+        return dt;
     }
 }
