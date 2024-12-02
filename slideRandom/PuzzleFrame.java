@@ -11,13 +11,12 @@ public class PuzzleFrame extends JFrame {
     private int size;
     private boolean started = false;
     private boolean finished = false;
-    private float dt = 10000000;
     private int cnt = 0;
     private JLabel label = new JLabel("time: 0s, move: 0");
-    private JLabel score = new JLabel("Your score : 0");
-    private double your_score = 0;
+    private JLabel score = new JLabel("Your score : 0,");
+    private int your_score = 0;
     private PuzzleFile pf = new PuzzleFile(your_score);
-    private double high_score = pf.r_score();
+    private int high_score = pf.r_score();
     private JLabel hs = new JLabel("High score : " + high_score);
     private int nowTime = 0;
 
@@ -92,6 +91,7 @@ public class PuzzleFrame extends JFrame {
         started = true;
         cnt = 0;
         button_board[size-1][size-1].setForeground(Color.BLACK);
+        score.setText("Your score : " + 0);
     }
     public void time(){
         while(true){
@@ -99,13 +99,12 @@ public class PuzzleFrame extends JFrame {
         }
     }
     public void updateTime(LocalTime t) {
-        nowTime = t.getHour()*3600+t.getMinute() * 60 + t.getSecond();
+        nowTime = t.getHour()*3600+t.getMinute() * 60 + t.getSecond() - sb.getT();
         if(started && !finished)
-            label.setText("time: "+(nowTime - sb.getT()) + "s, move: " + cnt);
+            label.setText("time: "+nowTime + "s, move: " + cnt);
         else if (finished){
-            dt = (nowTime - sb.getT());
-            your_score = (1000 -(dt * 0.7 + cnt * 0.3));
-            score.setText("Your score : " + your_score);
+            your_score = (int)(1000 -(nowTime * 0.7 + cnt * 0.3));
+            score.setText("Your score : " + your_score+",");
             pf.w_score(your_score);
             high_score = pf.r_score();
             hs.setText("High score : " + high_score);
@@ -115,11 +114,11 @@ public class PuzzleFrame extends JFrame {
 
     public void updateCnt(){
         cnt++;
-        if(started && !finished)
-            label.setText("time: "+(nowTime - sb.getT()) + "s, move: " + cnt);
+        if(started && !finished) {
+            label.setText("time: " + nowTime + "s, move: " + cnt);
+            your_score = (int)(1000 -(nowTime * 0.7 + cnt * 0.3));
+            score.setText("Your score : " + your_score+",");
+        }
     }
 
-    public float getDt(){
-        return dt;
-    }
 }

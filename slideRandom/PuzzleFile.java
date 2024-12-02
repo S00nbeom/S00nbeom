@@ -4,17 +4,17 @@ import javax.swing.*;
 import java.io.*;
 
 public class PuzzleFile {
-    private double now_score = 0;
-    private double high_score = 0;
-    public PuzzleFile(double ys) {
+    private int now_score = 0;
+    private int high_score = 0;
+    public PuzzleFile(int ys) {
         now_score = ys; //일단 0을 받아와서 초기화
     }
-    public double r_score(){
+    public int r_score(){
         try {
             FileReader reader = new FileReader("high_score.txt");
             BufferedReader infile = new BufferedReader(reader);
             String line = infile.readLine();
-            high_score = Double.parseDouble(line);
+            high_score = Integer.parseInt(line);
             return high_score;
         }
         catch (IOException e) {
@@ -33,7 +33,7 @@ public class PuzzleFile {
         }
         return high_score;
     }
-    public void w_score(double ys) {
+    public void w_score(int ys) {
         now_score = ys; //게임이 끝나고 생성된 점수로 변경
         if (now_score > high_score) {
             try {
