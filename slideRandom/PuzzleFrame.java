@@ -11,7 +11,7 @@ public class PuzzleFrame extends JFrame {
     private int size;
     private boolean started = false;
     private boolean finished = false;
-    private int dt = 10000000;
+    private float dt = 10000000;
     private JLabel label = new JLabel("time: 0s");
 
     public PuzzleFrame(SlidePuzzleBoard b) {
@@ -69,11 +69,12 @@ public class PuzzleFrame extends JFrame {
         }
     }
     public void ut(LocalTime t) {
+        int nowTime = t.getMinute() * 60 + t.getSecond();
         if(started && !finished)
-            label.setText("time: "+((t.getMinute() - sb.getMin())*60+t.getSecond() - sb.getSec() + "s"));
+            label.setText("time: "+(nowTime - sb.getT() + "s"));
         else if (finished){
-            dt = ((t.getMinute() - sb.getMin())*60+t.getSecond() - sb.getSec());
-            System.out.println("Clear time : " + dt);
+            dt = (nowTime - sb.getT());
+            System.out.println("Clear time : " + (dt * 0.5 + 10 * 0.7) );
             finished = false;
         }
     }

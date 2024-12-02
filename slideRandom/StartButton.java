@@ -8,7 +8,7 @@ import java.time.LocalTime;
 public class StartButton extends JButton implements ActionListener {
     SlidePuzzleBoard board;
     PuzzleFrame frame;
-    private int sec;
+    private int t;
     private int min;
 
     public StartButton(SlidePuzzleBoard b, PuzzleFrame f) {
@@ -21,14 +21,10 @@ public class StartButton extends JButton implements ActionListener {
         frame.started();
         board.createPuzzleBoard();
         frame.update();
-        min = LocalTime.now().getMinute();
-        sec = LocalTime.now().getSecond();
+        t = LocalTime.now().getMinute()*60 + LocalTime.now().getSecond();
     }
 
-    public int getMin() {
-        return min;
-    }
-    public int getSec() {
-        return sec;
+    public int getT() {
+        return t;
     }
 }
