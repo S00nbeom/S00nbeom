@@ -14,12 +14,18 @@ public class PuzzleFrame extends JFrame {
     private float dt = 10000000;
     private int cnt = 0;
     private JLabel label = new JLabel("time: 0s, move: 0");
+    private JLabel score = new JLabel("Your score : 0");
+    private double your_score = 0;
+    private PuzzleFile pf = new PuzzleFile(your_score);
+    private double high_score = pf.r_score();
+    private JLabel hs = new JLabel("High score : " + high_score);
     private int nowTime = 0;
 
     public PuzzleFrame(SlidePuzzleBoard b) {
         board = b;
         size = board.getSize();
         button_board = new PuzzleButton[size][size];
+        high_score = pf.r_score();
         sb = new StartButton(board,this);
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
@@ -34,8 +40,12 @@ public class PuzzleFrame extends JFrame {
                 p2.add(button_board[r][c]);
             }
         }
+        JPanel p3 = new JPanel(new FlowLayout());
+        p3.add(score);
+        p3.add(hs);
         cp.add(p1, BorderLayout.NORTH);
         cp.add(p2, BorderLayout.CENTER);
+        cp.add(p3, BorderLayout.SOUTH);
 
         setTitle("PuzzleFrame");
         setVisible(true);
@@ -94,7 +104,11 @@ public class PuzzleFrame extends JFrame {
             label.setText("time: "+(nowTime - sb.getT()) + "s, move: " + cnt);
         else if (finished){
             dt = (nowTime - sb.getT());
-            System.out.println("Clear time : " + (dt * 0.7 + cnt * 0.3) );
+            your_score = (1000 -(dt * 0.7 + cnt * 0.3));
+            score.setText("Your score : " + your_score);
+            pf.w_score(your_score);
+            high_score = pf.r_score();
+            hs.setText("High score : " + high_score);
             finished = false;
         }
     }
