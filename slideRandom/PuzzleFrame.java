@@ -50,12 +50,12 @@ public class PuzzleFrame extends JFrame {
                     if (piece != size*size) {
                         button_board[r][c].setText(""+piece);
                         if (board.foundBlank(piece))
-                            button_board[r][c].setBackground(Color.yellow);
+                            button_board[r][c].setBackground(new Color(255, 250, 51));
                         else button_board[r][c].setBackground(Color.white);
                     }
                     else {
                         button_board[r][c].setText("");
-                        button_board[r][c].setBackground(Color.black);
+                        button_board[r][c].setBackground(new Color(0, 0, 0));
                     }
                 }
             }
@@ -64,7 +64,16 @@ public class PuzzleFrame extends JFrame {
         }
     }
     public void finish(){
-        button_board[size-1][size-1].setText("Done");
+        for (int r = 0; r <size; r++) {
+            for (int c = 0; c < size; c++) {
+                if (r != size - 1 || c != size - 1)
+                    button_board[r][c].setBackground(Color.white);
+                else {
+                    button_board[size-1][size-1].setText("Done");
+                    button_board[size-1][size-1].setForeground(Color.white);
+                }
+            }
+        }
         finished = true;
         started = false;
     }
