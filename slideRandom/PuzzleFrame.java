@@ -103,7 +103,10 @@ public class PuzzleFrame extends JFrame {
         if(started && !finished)
             label.setText("time: "+nowTime + "s, move: " + cnt);
         else if (finished){
-            your_score = (int)(1000 -(nowTime * 0.7 + cnt * 0.3));
+            your_score = (int)(500 -(nowTime * 1.5 + cnt * 0.3));
+            if (your_score <= 0){
+                your_score = 0;
+            }
             score.setText("Your score : " + your_score+",");
             pf.w_score(your_score);
             high_score = pf.r_score();
@@ -116,7 +119,8 @@ public class PuzzleFrame extends JFrame {
         cnt++;
         if(started && !finished) {
             label.setText("time: " + nowTime + "s, move: " + cnt);
-            your_score = (int)(1000 -(nowTime * 0.7 + cnt * 0.3));
+            your_score = (int)(500 -(nowTime * 1.5 + cnt * 0.3));
+            if (your_score <= 0) your_score = 0;
             score.setText("Your score : " + your_score+",");
         }
     }
