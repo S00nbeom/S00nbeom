@@ -120,6 +120,21 @@ public class SlidePuzzleBoard {
         return (board[row][col].faceValue() == v);
     }
 
+    boolean foundBlank(int w){
+        PuzzlePiece temp = board[er][ec];
+        if (er > 0 && found(w,er-1,ec)){
+        }
+        else if (er < size-1 && found(w,er+1,ec)){
+        }
+        else if (ec > 0 && found(w,er,ec-1)){
+        }
+        else if (ec < size-1 && found(w,er,ec+1)){
+        }
+        else
+            return false;
+        return true;
+    }
+
     int getSize(){
         return size;
     }
