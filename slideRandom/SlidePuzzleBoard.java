@@ -63,7 +63,6 @@ public class SlidePuzzleBoard {
                 }
             }
         }
-        System.out.println(reversal); // test
         return (reversal != 0 && reversal % 2 == 0);
     }
 
