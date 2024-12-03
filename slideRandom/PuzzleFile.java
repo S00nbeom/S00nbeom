@@ -14,8 +14,17 @@ public class PuzzleFile {
             FileReader reader = new FileReader("high_score.txt");
             BufferedReader infile = new BufferedReader(reader);
             String line = infile.readLine();
-            high_score = Integer.parseInt(line);
-            return high_score;
+            try {
+                high_score = Integer.parseInt(line);
+                return high_score;
+            }
+            catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,"기록을 읽어오는데 문제가 발생했습니다. 파일 생성을 시도합니다");
+                FileWriter writer = new FileWriter("high_score.txt");
+                PrintWriter outfile = new PrintWriter(writer);
+                outfile.println("0");
+                outfile.close();
+            }
         }
         catch (IOException e) {
             JOptionPane.showMessageDialog(null,"파일에 문제가 발생했습니다. 파일 생성을 시도합니다");
